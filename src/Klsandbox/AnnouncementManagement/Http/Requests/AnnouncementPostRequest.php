@@ -2,6 +2,7 @@
 
 namespace Klsandbox\AnnouncementManagement\Http\Requests;
 
+use App\Http\Requests\Request;
 use Klsandbox\RoleModel\Role;
 
 class AnnouncementPostRequest extends Request

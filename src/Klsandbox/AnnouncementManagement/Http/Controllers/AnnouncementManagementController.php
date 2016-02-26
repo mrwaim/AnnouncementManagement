@@ -12,7 +12,7 @@ use Klsandbox\SiteModel\Site;
 use Klsandbox\NotificationService\Models\NotificationRequest;
 use App;
 use Session;
-use App\Http\Requests\AnnouncementPostRequest;
+use Klsandbox\AnnouncementManagement\Http\Requests\AnnouncementPostRequest;
 use Klsandbox\SmsManager\SmsBalance;
 use Log;
 

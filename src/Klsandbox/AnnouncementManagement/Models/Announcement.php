@@ -50,7 +50,8 @@ class Announcement extends Model
         Announcement::created(function ($announcement) {
             Log::info("created\t#announcement:$announcement->id");
 
-            User::createEveryoneEvent(['created_at' => $announcement->created_at, 'controller' => 'timeline', 'route' => '/new-announcement', 'target_id' => $announcement->id]);
+            $userClass = config('auth.model');
+            $userClass::createEveryoneEvent(['created_at' => $announcement->created_at, 'controller' => 'timeline', 'route' => '/new-announcement', 'target_id' => $announcement->id]);
         });
     }
 

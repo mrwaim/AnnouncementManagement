@@ -10,12 +10,14 @@
   | and give it the controller to call when that URI is requested.
   |
  */
-Route::group(['middleware' => ['auth']], function() {
-  Route::get('list', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getList');
-  Route::get('view', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getView');
+Route::group(['prefix' => 'announcement-management/'], function() {
+  Route::group(['middleware' => ['auth']], function () {
+    Route::get('list', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getList');
+    Route::get('view/{id}', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getView');
 
-  Route::group(['middleware' => ['auth.admin']], function() {
-    Route::get('create', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getCreate');
-    Route::post('create', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@postCreate');
+    Route::group(['middleware' => ['auth.admin']], function () {
+      Route::get('create', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getCreate');
+      Route::post('create', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@postCreate');
+    });
   });
 });
