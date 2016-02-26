@@ -2,6 +2,7 @@
 
 namespace Klsandbox\AnnouncementManagement\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Auth;
 use Klsandbox\AnnouncementManagement\Models\Announcement;
 use Klsandbox\RoleModel\Role;
