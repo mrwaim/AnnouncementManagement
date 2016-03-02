@@ -22,16 +22,7 @@
 @section('content')
     <!-- start: page -->
     <section class="panel">
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        @include('elements.error-message-partial')
 
         <form class="form-horizontal form-bordered form-bordered" method="POST"
               action="{{ url('/announcement-management/create') }}">
