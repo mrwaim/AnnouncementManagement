@@ -75,10 +75,6 @@
                                                     <span class="subject">{{$item->description}}</span>
                                                 </p>
 
-                                                <p class="m-none mail-delivery-type">
-                                                    <span class="mail-partial">{{$item->delivery_mode}}</span>
-                                                </p>
-
                                                 <p class="m-none mail-date" id="date">{{$item->created_at}}</p>
                                             </div>
                                         </a>
