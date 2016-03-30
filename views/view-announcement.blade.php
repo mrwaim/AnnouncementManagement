@@ -1,20 +1,7 @@
 @extends('app')
 
 @section('page-header')
-    <h2>Announcements</h2>
-
-    <div class="right-wrapper pull-right">
-        <ol class="breadcrumbs">
-            <li>
-                <a href="/">
-                    <i class="fa fa-home"></i>
-                </a>
-            </li>
-            <li><span>Announcement</span></li>
-        </ol>
-
-        <div class="sidebar-right-toggle"></div>
-    </div>
+    @include('elements.page-header', ['section_title' => 'Announcements', 'page_title' => 'View Announcement'])
 @endsection
 
 @section('content')
