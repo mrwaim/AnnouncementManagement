@@ -15,7 +15,7 @@ Route::group(['prefix' => 'announcement-management/'], function() {
     Route::get('list', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getList');
     Route::get('view/{id}', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getView');
 
-    Route::group(['middleware' => ['auth.admin']], function () {
+    Route::group(['middleware' => ['role:admin']], function () {
       Route::get('create', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@getCreate');
       Route::post('create', '\Klsandbox\AnnouncementManagement\Http\Controllers\AnnouncementManagementController@postCreate');
     });
