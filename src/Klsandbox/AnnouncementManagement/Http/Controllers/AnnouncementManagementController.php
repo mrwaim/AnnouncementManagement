@@ -58,7 +58,10 @@ class AnnouncementManagementController extends Controller
 
     public function getCreate()
     {
-        $roles = Role::forSite()->where('name', '<>', 'admin')->where('name', '<>', 'staff')->get();
+        $roles = Role::forSite()
+            ->where('name', '<>', 'admin')
+            ->where('name', '<>', 'sales')
+            ->where('name', '<>', 'staff')->get();
 
         $totalBalance = 'Not Applicable';
 
