@@ -27,6 +27,7 @@ use Log;
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereDeliveryMode($value)
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereRoleId($value)
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereSiteId($value)
+ * @mixin \Eloquent
  */
 class Announcement extends Model
 {
