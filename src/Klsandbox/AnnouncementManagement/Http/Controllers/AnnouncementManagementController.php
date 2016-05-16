@@ -60,6 +60,7 @@ class AnnouncementManagementController extends Controller
     {
         $roles = Role::forSite()
             ->where('name', '<>', 'admin')
+            ->where('name', '<>', 'dropship')
             ->where('name', '<>', 'sales')
             ->where('name', '<>', 'staff')->get();
 
