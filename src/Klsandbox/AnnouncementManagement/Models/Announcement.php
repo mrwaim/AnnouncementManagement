@@ -19,6 +19,7 @@ use Log;
  * @property integer $site_id
  * @property-read \App\Models\User $user
  * @property-read \Klsandbox\RoleModel\Role $role
+ *
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereUpdatedAt($value)
@@ -31,7 +32,6 @@ use Log;
  */
 class Announcement extends Model
 {
-
     use \Klsandbox\SiteModel\SiteExtensions;
 
     protected $table = 'announcements';
@@ -48,7 +48,7 @@ class Announcement extends Model
             return true;
         });
 
-        Announcement::created(function ($announcement) {
+        self::created(function ($announcement) {
             Log::info("created\t#announcement:$announcement->id");
 
             $userClass = config('auth.model');
@@ -65,5 +65,4 @@ class Announcement extends Model
     {
         return $this->belongsTo('Klsandbox\RoleModel\Role');
     }
-
 }

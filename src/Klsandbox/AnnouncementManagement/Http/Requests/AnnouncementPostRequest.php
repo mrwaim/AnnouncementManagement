@@ -7,7 +7,6 @@ use Klsandbox\RoleModel\Role;
 
 class AnnouncementPostRequest extends Request
 {
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,5 +30,4 @@ class AnnouncementPostRequest extends Request
             'description' => 'required|max:140',
         ];
     }
-
 }

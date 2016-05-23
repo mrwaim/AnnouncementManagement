@@ -11,7 +11,6 @@ use Log;
 
 class AdminSendAnnouncement extends Command
 {
-
     protected $name = 'admin:sendannouncement';
     protected $description = 'Manually send an announcement via sms.';
 
@@ -34,7 +33,7 @@ class AdminSendAnnouncement extends Command
                 ->where('role_id', '=', Role::Stockist()->id)
                 ->get();
 
-            Log::info("Delivering to " . count($approved_users) . " users");
+            Log::info('Delivering to ' . count($approved_users) . ' users');
             foreach ($approved_users as $user) {
                 $notification = new NotificationRequest();
                 $notification->route = '/new-announcement';

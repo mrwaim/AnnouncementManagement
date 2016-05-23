@@ -96,7 +96,6 @@ class AnnouncementManagementController extends Controller
         $announcement->delivery_mode = Input::get('delivery_mode');
         $announcement->role_id = Input::get('role_id');
 
-
         $announcement->save();
         Log::info("delivering\t#announcement:$announcement->id via $announcement->delivery_mode");
 
@@ -106,10 +105,9 @@ class AnnouncementManagementController extends Controller
                 ->where('role_id', '=', Role::Stockist()->id)
                 ->get();
 
-            Log::info("Delivering to " . count($approved_users) . " users");
+            Log::info('Delivering to ' . count($approved_users) . ' users');
             foreach ($approved_users as $user) {
-                if ($user->isBlocked())
-                {
+                if ($user->isBlocked()) {
                     continue;
                 }
 
@@ -137,5 +135,4 @@ class AnnouncementManagementController extends Controller
         return view('announcement-management::view-announcement')
             ->with('item', $item);
     }
-
 }
