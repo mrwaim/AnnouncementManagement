@@ -19,7 +19,6 @@ use Log;
  * @property integer $site_id
  * @property-read \App\Models\User $user
  * @property-read \Klsandbox\RoleModel\Role $role
- *
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereId($value)
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereCreatedAt($value)
  * @method static \Illuminate\Database\Query\Builder|\Klsandbox\AnnouncementManagement\Models\Announcement whereUpdatedAt($value)
