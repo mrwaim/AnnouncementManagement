@@ -62,6 +62,7 @@ class AnnouncementManagementController extends Controller
             ->where('name', '<>', 'admin')
             ->where('name', '<>', 'dropship')
             ->where('name', '<>', 'sales')
+            ->where('name', '<>', 'deleted')
             ->where('name', '<>', 'staff')->get();
 
         $totalBalance = 'Not Applicable';
