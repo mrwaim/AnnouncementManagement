@@ -2,5 +2,6 @@
 'folder' => 'announcement-management',
 'menu' => $auth->admin ? 'Announcement' : 'Announcements',
 'menuIcon' => 'fa-volume-up',
-'url' => 'list'
+'url' => 'list',
+'menuId' => 'announcement_menu',
 ])
