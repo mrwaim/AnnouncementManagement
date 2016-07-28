@@ -31,8 +31,6 @@ use Log;
  */
 class Announcement extends Model
 {
-    use \Klsandbox\SiteModel\SiteExtensions;
-
     protected $table = 'announcements';
     public $timestamps = true;
     protected $fillable = ['user_id', 'description', 'delivery_mode', 'role_id', 'created_at', 'updated_at'];

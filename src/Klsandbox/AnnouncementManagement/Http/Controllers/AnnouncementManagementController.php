@@ -8,7 +8,6 @@ use Klsandbox\AnnouncementManagement\Models\Announcement;
 use Klsandbox\RoleModel\Role;
 use Input;
 use Redirect;
-use Klsandbox\SiteModel\Site;
 use Klsandbox\NotificationService\Models\NotificationRequest;
 use App;
 use Session;
@@ -42,12 +41,10 @@ class AnnouncementManagementController extends Controller
     public function getList()
     {
         if (Auth::user()->role->name == 'admin') {
-            $list = Announcement::forSite()
-                ->orderBy('created_at', 'DESC')
+            $list = Announcement::orderBy('created_at', 'DESC')
                 ->get();
         } else {
-            $list = Announcement::forSite()
-                ->where('role_id', '=', Auth::user()->role_id)
+            $list = Announcement::where('role_id', '=', Auth::user()->role_id)
                 ->orderBy('created_at', 'DESC')
                 ->get();
         }
@@ -58,8 +55,7 @@ class AnnouncementManagementController extends Controller
 
     public function getCreate()
     {
-        $roles = Role::forSite()
-            ->where('name', '<>', 'admin')
+        $roles = Role::where('name', '<>', 'admin')
             ->where('name', '<>', 'dropship')
             ->where('name', '<>', 'sales')
             ->where('name', '<>', 'deleted')
@@ -67,7 +63,7 @@ class AnnouncementManagementController extends Controller
 
         $totalBalance = 'Not Applicable';
 
-        $smsBalances = SmsBalance::forSite()->get();
+        $smsBalances = SmsBalance::all();
         if ($smsBalances->count() == 1) {
             $smsBalance = $smsBalances->first();
             $totalBalance = $smsBalance->balance;
@@ -83,7 +79,6 @@ class AnnouncementManagementController extends Controller
         $userClass = config('auth.model');
 
         $role = Role::find(Input::get('role_id'));
-        Site::protect($role, 'Role');
 
         if ($role->name == 'admin') {
             // Security check
@@ -101,8 +96,7 @@ class AnnouncementManagementController extends Controller
         Log::info("delivering\t#announcement:$announcement->id via $announcement->delivery_mode");
 
         if ($announcement->delivery_mode == 'sms' || $announcement->delivery_mode == 'SMS') {
-            $approved_users = $userClass::forSite()
-                ->where('account_status', '=', 'Approved')
+            $approved_users = $userClass::where('account_status', '=', 'Approved')
                 ->where('role_id', '=', Role::Stockist()->id)
                 ->get();
 
@@ -130,8 +124,6 @@ class AnnouncementManagementController extends Controller
     public function getView($id)
     {
         $item = Announcement::find($id);
-
-        Site::protect($item);
 
         return view('announcement-management::view-announcement')
             ->with('item', $item);
