@@ -28,8 +28,7 @@ class AdminSendAnnouncement extends Command
 
         Log::info("delivering\t#announcement:$announcement->id via $announcement->delivery_mode");
         if ($announcement->delivery_mode == 'sms') {
-            $approved_users = $userClass::forSite()
-                ->where('account_status', '=', 'Approved')
+            $approved_users = $userClass::where('account_status', '=', 'Approved')
                 ->where('role_id', '=', Role::Stockist()->id)
                 ->get();
 
