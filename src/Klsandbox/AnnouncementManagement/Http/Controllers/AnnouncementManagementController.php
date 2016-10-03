@@ -93,26 +93,29 @@ class AnnouncementManagementController extends Controller
         $announcement->role_id = Input::get('role_id');
 
         $announcement->save();
-        Log::info("delivering\t#announcement:$announcement->id via $announcement->delivery_mode");
 
-        if ($announcement->delivery_mode == 'sms' || $announcement->delivery_mode == 'SMS') {
-            $approved_users = $userClass::where('account_status', '=', 'Approved')
-                ->where('role_id', '=', Role::Stockist()->id)
-                ->get();
+        if ($announcement->id) {
+            Log::info("delivering\t#announcement:$announcement->id via $announcement->delivery_mode");
 
-            Log::info('Delivering to ' . count($approved_users) . ' users');
-            foreach ($approved_users as $user) {
-                if ($user->isBlocked()) {
-                    continue;
+            if ($announcement->delivery_mode == 'sms' || $announcement->delivery_mode == 'SMS') {
+                $approved_users = $userClass::where('account_status', '=', 'Approved')
+                    ->where('role_id', '=', Role::Stockist()->id)
+                    ->get();
+
+                Log::info('Delivering to ' . count($approved_users) . ' users');
+                foreach ($approved_users as $user) {
+                    if ($user->isBlocked()) {
+                        continue;
+                    }
+
+                    $notification = new NotificationRequest();
+                    $notification->from_user_id = $userClass::admin()->id;
+                    $notification->route = '/new-announcement';
+                    $notification->sent = false;
+                    $notification->target_id = $announcement->id;
+                    $notification->to_user_id = $user->id;
+                    $notification->save();
                 }
-
-                $notification = new NotificationRequest();
-                $notification->from_user_id = $userClass::admin()->id;
-                $notification->route = '/new-announcement';
-                $notification->sent = false;
-                $notification->target_id = $announcement->id;
-                $notification->to_user_id = $user->id;
-                $notification->save();
             }
         }
 
