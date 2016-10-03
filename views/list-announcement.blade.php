@@ -48,6 +48,9 @@
                 <div id="mailbox-email-list" class="mailbox-email-list">
                     <div class="nano">
                         <div class="nano-content">
+                            @if(Session::has('success_message'))
+                                <div class="alert alert-success">{{Session::get('success_message')}}</div>
+                            @endif
                             <ul id="" class="list-unstyled">
                                 @foreach($list as $item)
                                     <li class="unread">
